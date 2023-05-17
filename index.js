@@ -1,7 +1,10 @@
+const { constants } = require('buffer');
 const express = require('express');
 const app = express();
 const path = require('path');
 
+// setting the view engine for ejs
+app.set('view engine', 'ejs');
 app.set('views', './views');
 app.use(express.urlencoded({ extended: true }));
 
@@ -50,46 +53,16 @@ app.get("/new", (req,res)=>{
             <title>
                 sign-up page
             </title>
-            <style>
-        body{
-            display: block;
-            margin-top: 50px;
-            heigth : 50px;
-        }
-        .container{
-            display: flex;
-            justify-content: center;
-            margin-left : 450px;
-            margin-top : 150px;
-            width : 400px;
-            border: 2px solid black;
-            border-radius: 10px;
-            padding: 10px ;
-            box-shadow: 7px 10px 5px gray;
-        }
-        form{
-            border: 2px solid black;
-            border-radius: 10px;
-            padding : 20px;
-        }
-        input{
-            margin-bottom : 10px;
-        }
-        button{
-            margin-left : 80px;
-        }
-        h1{
-            text-align: center;
-        }
-    </style>
+            
+   
         </head>
         <body>
-        <div class = 'container'>
-            <div class='content'>
+        <div >
+            <div >
             <h1> user details </h1>
                 <form method='post' action='/answer'>
                     name:<input type='text',placeholder='enter your name' name='user' /><br>
-                    age:<input type='number',placeholder='enter your age' name='age' /><br>
+                    age:<input type='text',placeholder='enter your email' name='email' /><br>
                     <button>submit</button>
                 </form>
             </div> 
@@ -101,10 +74,10 @@ app.get("/new", (req,res)=>{
 
 app.post("/answer", (req,res)=>{
     const name = req.body.user
-    const age = req.body.age
+    const email = req.body.email
     const data1 = [
         Name = name,
-        Age = age
+        Email = email
     ]
     res.render('form',{data1})
 })// port listening.....
